@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>var inDapIF=true,inGptIF=true;</script></head><body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"><script>window.dicnf = {};</script><script data-jc="42">(function(){window.viewReq=[];function b(a){var c=new Image;c.src=a.replace("&amp;","&");viewReq.push(c)}function d(a){fetch(a,{keepalive:!0,credentials:"include",redirect:"follow",method:"get",mode:"no-cors"}).catch(function(){b(a)})}window.vu=function(a){window.fetch?d(a):b(a)};}).call(this);</script><script>vu("https://securepubads.g.doubleclick.net/pcs/view?xai\x3dAKAOjstG1nutI3Wsn6m_-5vBGBQ9QQzXT59dXBAlfwZnhob7enc4oXXBRRayLgwyU-BvZ-XV4GWzpOiForBAtzphi20fL2_O6aBiOp2hIVlg1AML8CG4FPJ9QwnS1a2OEwrXoqIV1_Fix_lfoxdQx2cHGJz8E9j58zipZjfTxdxtTUOFAeCpwsrvhloP86BVT8yoW1i4SP_ttRrHae7mTcDjAHii1zl7lk4obbKA8b5dQB2WoSJf08UOfwWMpatkEJdgTP9u-HOFFxqgk8dKle8aDKv1LX4AShuduEgKl7VBtMfp3vc\x26sai\x3dAMfl-YSK8eyb7--mfjDU8E5j1E49Uv2mjySORlq0s5ndt5Srk0AK97K8r0qEkV4MSZHSSAKyN6kFRn7yO6HszGkrKZcYk4QTu_tTTT__jJFc\x26sig\x3dCg0ArKJSzHdu28J94vQdEAE\x26urlfix\x3d1\x26adurl\x3d")</script><div class="GoogleActiveViewInnerContainer" style="left:0px;top:0px;width:100%;height:100%;position:fixed;pointer-events:none;z-index:-9999;"></div><div style="display:inline" class="GoogleActiveViewElement" data-google-av-cxn="https://pagead2.googlesyndication.com/pcs/activeview?xai=AKAOjssNAnB2JzrIan8vxGzj6S7t5AjBDcVHyqSeIB8ugZFUkKOVoAhk8_AIeSf75jRpVaH39a_SY7UUuqU6lBDAfxVt6bZrRlOhEf5_gE0gNQw&amp;sig=Cg0ArKJSzCJ2YF3hI9jjEAE" data-google-av-adk="1877050773" data-google-av-metadata="la=0&amp;alp=xai&amp;alh=3907923422&amp;xdi=0&amp;" data-google-av-override="-1" data-google-av-dm="2" data-google-av-immediate="" data-google-av-aid="0" data-google-av-naid="1" data-google-av-slift="" data-google-av-cpmav="" data-google-av-itpl="19" data-google-av-rs="4">
+
+
+	
+	<script src="./jquery.min.js(1).download"></script>
+
+
+<textarea style="display:none;" id="javascript">&lt;script src='https://www.googletagservices.com/tag/js/gpt.js'&gt;
+  googletag.pubads().definePassback('/21748384903/DP-RS-guru99.com-INST_E-MCM-THF-300x250', [300, 250]).set("page_url", "guru99.com").display();
+&lt;/script&gt;</textarea>
+<textarea style="display:none;" id="refresh_every_n_seconds">45</textarea>
+<script>
+'use strict'
+const JQ=$;
+function IDGenerator() {
+ this.length=8;
+ this.timestamp=+new Date;
+ let getRandomInt=function(min,max) { return Math.floor(Math.random()*(max-min+1))+min; }
+ this.generate=function() {
+	 let ts=this.timestamp.toString();
+	 let parts=ts.split('').reverse();
+	 let id='';
+	 for(let i=0;i<this.length;++i) {
+		let index=getRandomInt(0,parts.length-1);
+		id+=parts[index];
+	 }
+	 return id;
+ }
+}
+const IDG=new IDGenerator();
+function getId() { return IDG.generate(); }
+
+function getWH(element) {
+	let eW=element.getBoundingClientRect().width;
+	let eH=element.getBoundingClientRect().height;
+	if(eW==0) {
+		eW=element.offsetWidth;
+		eH=element.offsetHeight;
+	}
+	if(eW==0) {
+		eW=JQ(element).width();
+		eH=JQ(element).height();
+	}
+	return {width:eW,height:eH};
+}
+function getSize(element) {
+	let eW=getWH(element).width;
+	let eH=getWH(element).height;
+	if(element.parentNode.nodeName=='PICTURE')
+		return {width:eW,height:eH};
+	let ePW=getWH(element.parentNode).width;
+	let ePH=getWH(element.parentNode).height;
+	if(eW>ePW) eW=ePW;
+	if(eH>ePH) eH=ePH;
+	return {width:eW,height:eH};
+}
+function toHTML(str) {
+	let parser=new DOMParser();
+	let dom=parser.parseFromString(str,'text/html');
+	return dom.body.textContent;
+}
+function log(obj) {
+	let dt=new Date();
+	let hh=dt.getHours();
+	let mm=dt.getMinutes();
+	let ss=dt.getSeconds();
+	let prefix='['+hh+':'+mm+':'+ss+'] bx-refresher-sc: ';
+	if(typeof(obj)==='string') {
+		console.log(prefix+String.fromCharCode('10149')+' '+obj);
+	} else {
+		console.log(prefix+String.fromCharCode('11183'));
+		console.log(obj);
+	}
+}
+function refresher(data) {
+	data.size=getSize(window.frameElement.parentNode);
+	data.javascript=toHTML(JQ('#javascript').html());
+	data.refresh_every_n_seconds=parseInt(JQ('#refresh_every_n_seconds').html());
+	data.iframe=document.createElement('iframe');
+	data.id='_quasar_refresher_'+getId();
+	data.iframe.id=data.id;
+	JQ('.GoogleActiveViewElement').append(data.iframe);
+	data.iframe.style.margin='0px';
+	data.iframe.style.padding='0px';
+	data.iframe.style.width=data.size.width+'px';
+	data.iframe.style.height=data.size.height+'px';
+	data.iframe.setAttribute('src','about:blank');
+	data.iframe.setAttribute('width',data.size.width);
+	data.iframe.setAttribute('height',data.size.height);
+	data.iframe.setAttribute('frameborder',0);
+	data.iframe.setAttribute('scrolling','no');
+	data.iframe.setAttribute('marginheight',0);
+	data.iframe.setAttribute('marginwidth',0);
+	data.iframeHandle=data.iframe.contentWindow||data.iframe.contentDocument;
+	data.iframeHandle.document.open();
+	data.iframeHandle.document.write(data.javascript);
+	data.iframeHandle.document.close();
+	setTimeout(function() {
+		let refresh_thread=setInterval(function() {
+			data.iframeHandle.document.open();
+			data.iframeHandle.document.write(data.javascript);
+			data.iframeHandle.document.close();
+		},1000*data.refresh_every_n_seconds);
+	},30000);
+
+}
+let data={};
+for(let i=0,c=document.getElementsByTagName('textarea');i<c.length;data[c[i].id]=c[i].innerHTML,++i);
+refresher(data);
+</script><iframe id="_quasar_refresher_31153773" src="./saved_resource(9).html" width="300" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="margin: 0px; padding: 0px; width: 300px; height: 250px;"></iframe>
+
+</div><script src="./osd_listener.js.download"></script><script type="text/javascript">osdlfm(-1,'','BDnSag2vwXcztGc2joAPfzL7YCgAAAAAQATgByAEJwAIC4AIA4AQBoAYf0ggFCIBhEAE','',1877050773,true,'la\x3d0\x26alp\x3dxai\x26alh\x3d3907923422\x26xdi\x3d0\x26',3,'CAASBORo_Pc','https://pagead2.googlesyndication.com/pcs/activeview?xai\x3dAKAOjssNAnB2JzrIan8vxGzj6S7t5AjBDcVHyqSeIB8ugZFUkKOVoAhk8_AIeSf75jRpVaH39a_SY7UUuqU6lBDAfxVt6bZrRlOhEf5_gE0gNQw\x26sig\x3dCg0ArKJSzCJ2YF3hI9jjEAE','');</script><script>if (window.top && window.top.postMessage) {window.top.postMessage('{"key_value":[{"key":"qid","value":"CIy7mKTcrOYCFc0RaAodX6YPqw"}],"googMsgType":"adpnt"}','*');}</script><div style="bottom:0;right:0;width:300px;height:250px;background:initial !important;position:absolute !important;max-width:100% !important;max-height:100% !important;pointer-events:none !important;image-rendering:pixelated !important;z-index:2147483647;background-image:url(&#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAWBAMAAACrl3iAAAAABlBMVEUAAAD+AciWmZzWAAAAAnRSTlMAApidrBQAAAB+SURBVBjTbZHLEQAhCENDB+m/2pVvYGY5oEjEBwL/Zmkw308EMLLP89lEoXCtjR6pblWu6ZV3+VajPRWJxA5JW4AsbjRJ1I6zJAFZHERFarReqNKR4y7tm2YoEBwMkddlkRq2Wl1y6msmthtZEwz0QTrzzlfO73DY3d+/7Mofek4GCypqn7cAAAAASUVORK5CYII=&#39;) !important;"></div></body></html>

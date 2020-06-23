@@ -1,0 +1,47 @@
+1.
+
+select first_name,last_name,city,state_province from employees e,locations l,departments d 
+where e.department_id=d.department_id and l.location_id=d.location_id;
+
+2.
+
+select first_name,last_name,salary,grade_level from employees e,jobs j;job_grades jd 
+where e.job_id=j.job_id and j.min_salary=jd.lowest_salary; 
+
+3.
+
+select first_name,last_name,city,state_province from employees e,locations l,departments d 
+where e.department_id=d.department_id and l.location_id=d.location_id and first_name like "%z%";
+
+4.
+
+select first_name,last_name,salary from employees 
+where salary<(select salary from employees where employee_id=89);
+
+5.
+
+select first_name,last_name,d.department_id from employees e,departments d
+where departmentid=(select department_id from employees where lower(last_name)=lower("Magesh"));
+
+6.
+
+select job_title,department_name,first_name,last_name,start_date from jobs j,job_history jh,departments d,employees e
+where d.department_id=e.department_id and j.job_id=e.job_id and jh.job_id=j.job_id and start_date>="2010-01-01" and end_date<="2017-08-31";
+
+7.
+
+select job_title,first_name,last_name,(max_salary-salary) "difference" from employees e,jobs j
+where e.job_id=j.job_id;
+
+8.
+
+select department_name,avg(salary) "Average Salary",count(employee_id) "Count" from employees e and departments d
+where e.department_id=d.department_id where commision_pvt!=0 group by department_name order by count;
+
+
+9.
+
+select department_name,count(employee_id) "Count" from employees e and departments d
+where e.department_id=d.department_id group by department_name order by Count;
+
+

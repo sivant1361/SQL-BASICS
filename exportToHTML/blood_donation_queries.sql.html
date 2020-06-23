@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>blood_donation_queries.sql</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+blood_donation_queries.sql</font>
+</center></td></tr></table>
+<pre><span class="s0">USE </span><span class="s1">BLOODDONOR</span><span class="s0">;</span>
+
+<span class="s2">#1. Updating the name of the donor sharavn to sharma where donor id=10</span>
+
+	<span class="s0">update </span><span class="s1">donor </span><span class="s0">set </span><span class="s1">dname=&quot;Sharma&quot; </span>
+    <span class="s0">where </span><span class="s1">did=</span><span class="s3">10</span><span class="s0">;</span>
+
+<span class="s2">#2. Displaying donors with blood group o+ve</span>
+
+	<span class="s0">select </span><span class="s1">dname </span><span class="s0">as </span><span class="s1">&quot;Name&quot;</span><span class="s0">,</span><span class="s1">dcno </span><span class="s0">as </span><span class="s1">&quot;Ph.No&quot; </span><span class="s0">from </span><span class="s1">donor d</span>
+    <span class="s0">join </span><span class="s1">blood b </span><span class="s0">on </span><span class="s1">b.did=d.did</span>
+    <span class="s0">where </span><span class="s1">bgrp=&quot;O+ve&quot;</span><span class="s0">;</span>
+    
+<span class="s2">#3 Displaying the name of patient,disease and blood group received </span>
+
+	<span class="s0">select </span><span class="s1">pname</span><span class="s0">,</span><span class="s1">pdisease</span><span class="s0">,</span><span class="s1">bgrp </span><span class="s0">from </span><span class="s1">blood b</span>
+    <span class="s0">inner join </span><span class="s1">patient p </span><span class="s0">on </span><span class="s1">p.pid=b.pid</span><span class="s0">;</span>
+    
+<span class="s2">#4 Serial numbers of blood remaining at the blood bank</span>
+
+	<span class="s0">select </span><span class="s1">sno</span><span class="s0">,</span><span class="s1">bgrp </span><span class="s0">from </span><span class="s1">blood b</span>
+    <span class="s0">left join </span><span class="s1">patient p </span><span class="s0">on </span><span class="s1">b.pid=p.pid</span>
+    <span class="s0">where </span><span class="s1">p.pid </span><span class="s0">is null;</span>
+    
+<span class="s2">#5 Count of distinct blood groups</span>
+
+	<span class="s0">select distinct </span><span class="s1">bgrp</span><span class="s0">,count</span><span class="s1">(*) </span><span class="s0">as count from </span><span class="s1">blood</span>
+    <span class="s0">group by </span><span class="s1">bgrp</span><span class="s0">;</span>
+    
+<span class="s2">#6 What is the blood group of sivant and at which bank is the blood of the person stored at</span>
+
+	<span class="s0">select </span><span class="s1">bgrp</span><span class="s0">,</span><span class="s1">bname </span><span class="s0">from </span><span class="s1">donor d</span>
+    <span class="s0">join </span><span class="s1">blood b </span><span class="s0">on </span><span class="s1">b.did=d.did</span>
+    <span class="s0">join </span><span class="s1">bloodbank bd </span><span class="s0">on </span><span class="s1">b.bid=bd.bid</span>
+    <span class="s0">where </span><span class="s1">lower(dname)=lower(&quot;sivant&quot;)</span><span class="s0">;</span>
+    
+<span class="s2">#7 What are the scarcely available blood groups</span>
+
+    <span class="s0">select </span><span class="s1">bgrp </span><span class="s0">from </span><span class="s1">blood </span>
+    <span class="s0">group by </span><span class="s1">bgrp </span>
+    <span class="s0">having count</span><span class="s1">(bgrp)&lt;=</span><span class="s3">1</span><span class="s0">;</span>
+    
+<span class="s2">#8 Names of the donors whose name start with &quot;S&quot;</span>
+
+	<span class="s0">select </span><span class="s1">dname </span><span class="s0">from </span><span class="s1">donor </span>
+    <span class="s0">where </span><span class="s1">dname </span><span class="s0">like </span><span class="s1">&quot;S%&quot;</span><span class="s0">;</span>
+
+<span class="s2">#9 Display the details of the blood banks</span>
+
+	<span class="s0">select </span><span class="s1">* </span><span class="s0">from </span><span class="s1">bloodbank</span><span class="s0">;</span>
+    
+<span class="s2">#10 Display a blood group available in bank 10 , which is not available in bank 11</span>
+
+	<span class="s0">select </span><span class="s1">a.bgrp </span><span class="s0">from </span><span class="s1">(</span><span class="s0">select </span><span class="s1">* </span><span class="s0">from </span><span class="s1">blood </span><span class="s0">where </span><span class="s1">bid=</span><span class="s3">10</span><span class="s1">) </span><span class="s0">as </span><span class="s1">a</span>
+    <span class="s0">left join </span><span class="s1">(</span><span class="s0">select </span><span class="s1">* </span><span class="s0">from </span><span class="s1">blood </span><span class="s0">where </span><span class="s1">bid=</span><span class="s3">11</span><span class="s1">) </span><span class="s0">as </span><span class="s1">b </span><span class="s0">on </span><span class="s1">a.bgrp=b.bgrp</span>
+    <span class="s0">where </span><span class="s1">b.bgrp </span><span class="s0">is null;</span>
+</pre>
+</body>
+</html>

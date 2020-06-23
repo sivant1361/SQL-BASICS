@@ -1,0 +1,115 @@
+
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body marginwidth="0" marginheight="0"><img src="https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&amp;r=https://usr.undertone.com/userPixel/sync?partnerId=39&amp;uid=" name="OpenX" alt="" style="display:none" border="0" height="1" width="1"><img src="https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&amp;uid=$UID" name="AppNexus" alt="" style="display:none" border="0" height="1" width="1">
+
+<script type="text/javascript">
+	var gdpr = null;
+	var gdprStr = "";
+	var path = location.href.split("?");
+	if (path.length == 2) {
+		var args = path[1].split("&");
+		for (i=0; i<args.length; i++) {
+			var keyval = args[i].split("=");
+			if (keyval.length == 2) {
+				if (keyval[0] == "gdpr") {
+					gdpr = keyval[1];
+				} else if ( keyval[0] == "gdprstr") {
+					gdprStr = keyval[1];
+				}
+			}
+		}
+	}	
+    var userIdEncCookie = getCookie("UTID_ENC");
+    var userIdCookie = getCookie("UTID");
+    var partners = [];
+	
+	if (gdpr === null || gdpr == 0) {
+		partners.push(
+			{
+                name: "AppNexus",
+                url: "https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=$UID"
+            },
+			{
+                name: "OpenX",
+                url: "https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid="
+            }
+		);
+	} else {
+		// this syncs with openx but with an extra redirect that checks the gdpr consent string first
+		partners.push(
+			{
+                name: "OpenX",
+                url: "https://usr.undertone.com/userPixel/syncOne?id=1&of=2&gdpr=" + gdpr + "&gdprstr=" + gdprStr
+			}
+		);
+	}
+    if (userIdCookie !== "") {
+        partners.push(
+            {
+                name: "Crosswise",
+                url: "https://cw.addthis.com/t.gif?pid=46&pdid=" + userIdCookie
+            }
+        );
+    }
+    if (userIdEncCookie !== "") {
+        partners.push(
+            {
+                name: "Exelate (Batch Integration)",
+                url: "https://loadm.exelator.com/load/?p=204&g=1145&j=0&utid=" + userIdEncCookie
+            },
+            {
+                name: "Adobe",
+                url: "https://dpm.demdex.net/ibs:dpid=152416&dpuuid=" + userIdEncCookie
+            },
+            {
+                name: "BlueKai",
+                url: "https://tags.bluekai.com/site/15597?id=" + userIdEncCookie
+            },
+            {
+                name: "LiveRamp",
+                url: "https://idsync.rlcdn.com/403716.gif?partner_uid=" + userIdEncCookie
+            },
+            {
+                name: "Krux",
+                url: "https://beacon.krxd.net/usermatch.gif?partner=undertone&partner_uid=" + userIdEncCookie
+            },
+		    {
+                name: "Alphonso",
+                url: "https://sync.alphonso.tv/sync?srcid=1200&puid=" + userIdEncCookie
+            }
+        );
+    }
+	
+    function getCookie(name) {
+        var re = new RegExp(name + "=([^;]+)");
+        var value = re.exec(document.cookie);
+        return (value != null) ? unescape(value[1]) : "";
+    }
+    function plantPixels() {
+        var imgs = getAllImgs();
+        for (var i = 0; i < imgs.length; i++) {
+            document.body.insertAdjacentElement('afterbegin', imgs[i]);
+        }
+    }
+    function getAllImgs() {
+        var imgs = [];
+        for (var i = 0; i < partners.length; i++) {
+            var img = document.createElement("img");
+            img.setAttribute("src", partners[i].url);
+            img.setAttribute("name", partners[i].name);
+            img.setAttribute("alt", "");
+            img.setAttribute("style", "display:none");
+            img.setAttribute("border", "0");
+            img.setAttribute("height", "1");
+            img.setAttribute("width", "1");
+            imgs.push(img);
+        }
+        return imgs;
+    }
+    plantPixels();
+</script>
+
+
+
+
+</body></html>

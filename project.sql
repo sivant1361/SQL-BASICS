@@ -1,0 +1,11 @@
+create database book;
+use book;
+create table book(price int,title varchar(10),no_of_pages int,isbn int primary key,feid int,foreign key(feid) references editor(eid),fsid int,foreign key(fsid) references subject(sid));
+create table author(aid int primary key,aname varchar(15) not null,address varchar(30),acontactno int,fsid int,foreign key(fsid) references subject(sid));
+create table editor(eid int primary key,ename varchar(15) not null,email varchar(30),econtactno int);
+create table sub(title varchar(15),sid int primary key);
+create table items(ino int primary key,type varchar(10),fisbn int,foreign key(fisbn) references book(isbn));
+create table supp(suid int primary key,sname varchar(15),scontactno int);
+create table shopowner(shid int primary key,sname varchar(67),addres varchar(45),fisbn int,foreign key(fisbn) references book(isbn));
+create table writes(faid int,fisbn int,foreign key(faid)references author(aid),foreign key(fisbn) references book(isbn));
+create table supplied_by(fsuid int,fino int,foreign key(fino)references items(ino),foreign key(fsuid) references supp(suid));
